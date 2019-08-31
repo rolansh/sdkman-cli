@@ -34,6 +34,9 @@ function __sdk_uninstall {
 	if [ -d "${SDKMAN_CANDIDATES_DIR}/${candidate}/${version}" ]; then
 		__sdkman_echo_green "Uninstalling ${candidate} ${version}..."
 		rm -rf "${SDKMAN_CANDIDATES_DIR}/${candidate}/${version}"
+	elif [ -L "${SDKMAN_CANDIDATES_DIR}/${candidate}/${version}" ]; then
+		__sdkman_echo_green "Unlinking local installation of ${candidate} ${version}..."
+		rm "${SDKMAN_CANDIDATES_DIR}/${candidate}/${version}"
 	else
 		__sdkman_echo_red "${candidate} ${version} is not installed."
 	fi
